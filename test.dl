@@ -1,0 +1,7 @@
+"hello" = "bye"
+
+print "hello"
+
+1 = 2
+
+print 1
