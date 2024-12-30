@@ -83,6 +83,17 @@ bool isOutsideQuotes(string source, char find) {
 
     return false;
 }
+void removeAll(string& source, char find) {
+    string result = "";
+
+    for(size_t i = 0; i < source.length(); i++) {
+        if(source.at(i) != find) {
+            result.push_back(source.at(i));
+        }
+    }
+
+    source = result;
+}
 
 string translateSingleText(string& source) {
     for(Modification m : modifications) {
@@ -92,7 +103,7 @@ string translateSingleText(string& source) {
         }
     }
 
-    return "undefined";
+    return source;
 }
 
 void makeLiteral(string& source) {
@@ -104,8 +115,10 @@ void makeLiteral(string& source) {
         }
 
         source = result;
+        removeAll(source, '\"');
     } else {
         translateSingleText(source);
+        removeAll(source, '\"');
         return;
     }
 }
